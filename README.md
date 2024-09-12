@@ -6,9 +6,11 @@ In Dockerfiles and Docker images, `CMD` and `ENTRYPOINT` define the default beha
 
 **Note:** It is only mandatory that **either** `CMD` or `ENTRYPOINT` is set as this defines the container's default behaviour.
 
+Prisma Cloud leverages the `ENTRYPOINT` to monitor and secure containerised applications by injecting security controls at the container startup phase. By enforcing security checks and controls within the `ENTRYPOINT`, Prisma Cloud ensures that critical security policies are applied before the application becomes operational. This approach enhances security by detecting vulnerabilities, misconfigurations, and potential threats early in the container lifecycle.
+
 ## About ENTRYPOINT Creator
 
-As mentioned above, images require **either** a `CMD` or `ENTRYPOINT` at a minimum. When an image that requires protection only has a `CMD` defined, users have two options:
+Given that a Docker image is valid so long as it contains **either** a `CMD` or `ENTRYPOINT`, images that contain only a `CMD` cannot be secured by Prisma Cloud. This can be resolved using one of the following methods:
 
 1. Update their Dockerfile to include an `ENTRYPOINT`
 
@@ -107,8 +109,8 @@ A summary of the process is provided at the end of the execution:
 EXECUTION SUCCESSFUL
 ######################################################################################################################################################
 Successfully Extracted CMD command ["redis-server","/usr/local/etc/redis/redis.conf"] and created two new Task Definition files:
-ENTRYPOINT Task Definition: /mnt/c/Will/new-code/AutoEntrypoint/task_definition_with_entrypoint.json
-ENTRYPOINT & CMD Task Definition: /mnt/c/Will/new-code/AutoEntrypoint/task_definition_with_entrypoint_and_cmd.json
+ENTRYPOINT Task Definition: /tmp/AutoEntrypoint/task_definition_with_entrypoint.json
+ENTRYPOINT & CMD Task Definition: /tmp/AutoEntrypoint/task_definition_with_entrypoint_and_cmd.json
 ######################################################################################################################################################
 ```
 
